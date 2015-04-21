@@ -1,0 +1,47 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:+'
+    }
+}
+apply plugin: 'com.android.application'
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    options.compilerArgs << "-Xlint:deprecation"
+}
+repositories {
+    mavenCentral()
+}
+android {
+    lintOptions {
+        abortOnError false
+    }
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            res.srcDirs = ['res/']
+            java.srcDirs = ['src/']
+            assets.srcDirs = ['assets']
+        }
+    }
+    defaultConfig {
+        targetSdkVersion 22
+        minSdkVersion 10
+    }
+    compileSdkVersion 21
+    buildToolsVersion "21.1.0"
+
+    productFlavors {
+        sdk {
+
+        }
+    }
+}
+
+dependencies {
+    compile files('libs/android-support-v4.jar')
+    compile files('libs/adsdk_0.1.7.0.jar')
+    compile files('libs/universal-image-loader-1.9.3.jar')
+}
